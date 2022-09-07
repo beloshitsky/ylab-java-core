@@ -28,3 +28,19 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+.settings/
+.project
+.classpath
+.springBeans
+**/target/
+/commit.txt
+/*/logs/
+/*/wrk/
+effective-pom.xml
+effective-settings.xml
+/*/.gwt/
+.cache
+.idea/
+*.lck
+*/dependency-reduced-pom.xml
+node_modules
