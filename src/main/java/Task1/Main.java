@@ -42,6 +42,7 @@ public class Main {
         System.out.println("\n" + "Filtered data:");
 
         Arrays.stream(RAW_DATA)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toSet())
                 .stream()
                 .collect(Collectors.toMap(Person::getId, Person::getName))
