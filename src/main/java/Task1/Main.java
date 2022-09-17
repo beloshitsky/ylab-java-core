@@ -41,17 +41,19 @@ public class Main {
 
         System.out.println("\n" + "Filtered data:");
 
-        Arrays.stream(RAW_DATA)
-                .filter(Objects::nonNull)
-                .collect(Collectors.toSet())
-                .stream()
-                .collect(Collectors.toMap(Person::getId, Person::getName))
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(
-                        p -> p.getValue(),
-                        p -> 1, Integer::sum
-                )).forEach((key, value) -> System.out.println("Key: " + key + " - " + "Value: " + value));
+        if (RAW_DATA == null) System.err.println("Null");
+        else {
+            Set<Person> personSet = Arrays.stream(RAW_DATA)
+                    .filter(Objects::nonNull)
+                    .sorted(Comparator.comparing(Person::getId))
+                    .collect(Collectors.toCollection(LinkedHashSet::new));
 
+            TreeMap<String, Integer> persons = new TreeMap<>();
+            for (Person person : personSet) {
+                persons.put(person.getName(), persons.getOrDefault(person.getName(), 0) + 1);
+            }
+
+            persons.forEach((k, v) -> System.out.println("Key: " + k + " - " + "Value: " + v));
+        }
     }
 }
